@@ -62,7 +62,7 @@ def update():
     req_data = request.get_json()
     try:
         data = user_schema.load(req_data)
-    except Exception:
+    except:
         message = {"error": "Either required fields are missing or incorrect fields provided"}
         return custom_response(message, 400)
     user = UserModel.get_one_user(g.user.get('id'))
