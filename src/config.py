@@ -33,8 +33,10 @@ class Testing(object):
     Development environment configuration
     """
     TESTING = True
-    JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_TEST_URL')
+    # JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
+    JWT_SECRET_KEY = 'some secret key'
+    # SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_TEST_URL')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///test.sqlite3'
     SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 app_config = {
