@@ -13,10 +13,10 @@ User Model
 
 Site Model
 1. Create a site - POST api/v1/sites
-Get All sites - GET api/v1/sites
-Get A site - GET api/v1/sites/<int:site_id>
-Update A site - PUT api/v1/sites/<int:site_id>
-Delete A site - DELETE api/v1/sites/<int:site_id>
+2. Get All sites - GET api/v1/sites
+3. Get A site - GET api/v1/sites/<int:site_id>
+4. Update A site - PUT api/v1/sites/<int:site_id>
+5. Delete A site - DELETE api/v1/sites/<int:site_id>
 
 In request header, we need api-token, which is generated while creating new user or while logging in.
 ```
