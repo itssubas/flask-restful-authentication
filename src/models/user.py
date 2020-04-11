@@ -12,13 +12,6 @@ class UserModel(db.Model):
     # table name
     __tablename__ = 'users'
 
-    # id = db.Column(db.Integer, primary_key=True)
-    # name = db.Column(db.String(128), nullable=False)
-    # email = db.Column(db.String(128), unique=True, nullable=False)
-    # password = db.Column(db.String(128), nullable=True)
-    # created_at = db.Column(db.DateTime)
-    # modified_at = db.Column(db.DateTime)
-
     id = db.Column(db.Integer, primary_key=True)
     fullname = db.Column(db.String(255))
     email = db.Column(db.String(255), unique=True, nullable=False)
@@ -53,23 +46,27 @@ class UserModel(db.Model):
 
     def delete(self):
         # db.session.delete(self)
+        self.email = self.email + str(datetime.datetime.utcnow().timestamp())
         self.deleted_at = datetime.datetime.utcnow()
         db.session.commit()
 
     @staticmethod
     def get_all_users():
-        return UserModel.query.all()
+        users = UserModel.query.filter(UserModel.deleted_at == None).all()
+        return users
 
     @staticmethod
     def get_one_user(id):
-        return UserModel.query.get(id)
+        user = UserModel.query.filter(UserModel.deleted_at == None, UserModel.id == id).first()
+        return user
 
     @staticmethod
     def get_user_by_email(value):
-        return UserModel.query.filter_by(email=value).first()
+        user = UserModel.query.filter(UserModel.deleted_at == None, UserModel.email == value).first()
+        return user
 
 
-    def __repr(self):
+    def __repr__(self):
         return '<id {}>'.format(self.id)
 
     def __generate_hash(self, password):

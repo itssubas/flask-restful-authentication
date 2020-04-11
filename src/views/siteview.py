@@ -26,6 +26,7 @@ def create():
 
 
 @site_api.route('/', methods=['GET'])
+@Auth.auth_required
 def get_all():
     """
     Get All Sites
@@ -36,6 +37,7 @@ def get_all():
 
 
 @site_api.route('/<int:site_id>', methods=['GET'])
+@Auth.auth_required
 def get_one(site_id):
     """
     Get A Site

@@ -7,15 +7,7 @@ class SiteModel(db.Model):
     """
     Site Model
     """
-
     __tablename__ = 'sites'
-
-    # id = db.Column(db.Integer, primary_key=True)
-    # title = db.Column(db.String(128), nullable=False)
-    # contents = db.Column(db.Text, nullable=False)
-    # created_at = db.Column(db.DateTime)
-    # modified_at = db.Column(db.DateTime)
-
 
     id = db.Column(db.Integer, primary_key=True)
     domain = db.Column(db.String(255), nullable=False)
@@ -62,12 +54,14 @@ class SiteModel(db.Model):
     @staticmethod
     # def get_all_blogposts():
     def get_all_sites():
-        return SiteModel.query.all()
+        sites = SiteModel.query.filter(SiteModel.deleted_at == None).all()
+        return sites
 
     @staticmethod
     # def get_one_blogpost(id):
     def get_one_site(id):
-        return SiteModel.query.get(id)
+        site = SiteModel.query.filter(SiteModel.deleted_at == None, SiteModel.id == id).first()
+        return site
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
